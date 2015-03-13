@@ -1,0 +1,30 @@
+.main_container {
+  width: 750px;
+  background-color:  #fff8eb;
+  border: solid 1px #ff953f;
+  height: 400px;
+}
+.palette {
+  margin: 25px;
+  padding: 15px;
+  border: solid 1px #95eaea;
+  width: 420px;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.square {
+  float: left;
+  height: 98px;
+  margin: 0 0 0 0;
+  display: block;
+  border-right: solid 2px #bf692f;
+  border-top: solid 2px #bf692f;
+}
+.palette-color {
+  display: inline-block;
+  margin: 15px;
+  width: 50px;
+  height: 50px;
+}
