@@ -14,4 +14,4 @@ require_relative 'models/mondrian'
 #controllers
 require_relative 'controllers/main_controller'
 
-  #binding.pry
+binding.pry
