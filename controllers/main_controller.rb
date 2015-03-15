@@ -16,5 +16,5 @@ post "/save_mondrian" do
 end
 
 get "/load_mondrian/:id" do
-  Mondrian.where(id: params["id"])
+  Mondrian.where(id: params[:id])[0].attributes.to_json
 end

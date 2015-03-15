@@ -1,11 +1,13 @@
 window.onload = function() {
-  // define variables
+  // Declare variables shared by functions
   var squares = document.getElementsByClassName('height');
   var palettes = document.getElementsByClassName('palette-color');
   var style;
   var color;
+  var js_req;
 
-  // define functions
+  // Define functions
+  // Convert rgb to hex
   function rgb2hex(rgb){
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
     return (rgb && rgb.length === 4) ? "#" +
@@ -14,6 +16,7 @@ window.onload = function() {
       ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
     };
 
+  // Collect colors from canvas
   function return_colors() {
     var saved_colors_array = [];
     for(var i = 0; i < squares.length; i++) {
@@ -25,8 +28,9 @@ window.onload = function() {
     return saved_colors_array.join();
   };
 
+  // Save mondrian to database
   function save_mondrian(colors_string) {
-    // retrieve params to send
+    // Retrieve params to send
     var mondrian_title = document.getElementById("mondrian_title").value;
     var params = "title=" + mondrian_title + "&colors=" + colors_string;
     // POST params to server
@@ -36,7 +40,15 @@ window.onload = function() {
     js_req.send(params);
   }
 
-  // set event listeners and corresponding events
+// Load mondrian from database
+  function load_mondrian(id) {
+    var url = "/load_mondrian/" + id;
+    js_req = new XMLHttpRequest();
+    js_req.open("get", url);
+    js_req.send();
+  }
+
+  // Set event listeners and corresponding events
 
   // Set color when clicking on palette color
   for(var i = 0; i < palettes.length; i++) {
@@ -77,6 +89,13 @@ window.onload = function() {
   load_button = document.getElementById('load_mondrian');
   load_button.onclick = function() {
     var datalist = document.getElementById("title_list_input");
-    console.log(datalist.value);
+    load_mondrian(datalist.value);
+    js_req.addEventListener("load", function() {
+      mondrian = JSON.parse(js_req.response);
+      colors_array = mondrian.colors.split(",");
+      for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors_array[i];
+      }
+    });
   };
 };
