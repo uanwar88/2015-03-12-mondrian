@@ -42,8 +42,8 @@ html
       input id="mondrian_title" type="text" size="25" maxlength="50"
       input type="button" id="save_mondrian" value="Save"
       br
-      input list="load_list" size="25"
-      datalist id="load_list"
-        option value="1" Blah
-        option value="2" BlahBlah
+      input id="title_list_input" list="title_list" size="25"
+      datalist id="title_list"
+        - @results.each do |x|
+          option value="#{x.id}" #{x.title}
       input type="button" id="load_mondrian" value="Load"

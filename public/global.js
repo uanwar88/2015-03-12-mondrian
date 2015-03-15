@@ -27,8 +27,8 @@ window.onload = function() {
 
   function save_mondrian(colors_string) {
     // retrieve params to send
-    mondrian_title = document.getElementById("mondrian_title").value;
-    params = "title=" + mondrian_title + "&colors=" + colors_string;
+    var mondrian_title = document.getElementById("mondrian_title").value;
+    var params = "title=" + mondrian_title + "&colors=" + colors_string;
     // POST params to server
     js_req = new XMLHttpRequest();
     js_req.open("post", "/save_mondrian");
@@ -36,11 +36,9 @@ window.onload = function() {
     js_req.send(params);
   }
 
-  function load_mondrian() {
-    console.log("Load function triggered!");
-  };
-
   // set event listeners and corresponding events
+
+  // Set color when clicking on palette color
   for(var i = 0; i < palettes.length; i++) {
     palettes[i].onclick = function() {
       style = window.getComputedStyle(this);
@@ -48,12 +46,14 @@ window.onload = function() {
     };
   };
 
+  // Set background color on canvas
   for(var i = 0; i < squares.length; i++) {
     squares[i].onclick = function() {
       this.style.backgroundColor = color;
     };
   };
 
+  // Save mondrian on button click
   save_button = document.getElementById('save_mondrian');
   save_button.onclick = function() {
     colors = return_colors();
@@ -73,7 +73,10 @@ window.onload = function() {
     });
   };
 
+  // Load mondrian on button click
   load_button = document.getElementById('load_mondrian');
-  load_button.onclick = load_mondrian;
-
+  load_button.onclick = function() {
+    var datalist = document.getElementById("title_list_input");
+    console.log(datalist.value);
+  };
 };

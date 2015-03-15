@@ -1,4 +1,5 @@
 get "/" do
+  @results = Mondrian.select("id, title")
   slim :main
 end
 
@@ -12,4 +13,8 @@ post "/save_mondrian" do
   else
     "This mondrian already exists!"
   end
+end
+
+get "/load_mondrian/:id" do
+  Mondrian.where(id: params["id"])
 end

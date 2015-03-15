@@ -3,6 +3,7 @@ require 'sqlite3'
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'slim'
+require 'json'
 
 #database
 require_relative 'database/database_setup'
@@ -14,4 +15,4 @@ require_relative 'models/mondrian'
 #controllers
 require_relative 'controllers/main_controller'
 
-binding.pry
+#binding.pry
